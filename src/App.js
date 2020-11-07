@@ -1,24 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import RowComponenet from './components/RowCompoenet';
+import requests from './requests';
+import Banner from './components/Banner';
+import Nav from './components/Nav';
+import { ThemeContext } from './context/ThemeContext';
+import { useContext } from 'react';
 
 function App() {
+  const { lightTheme } = useContext(ThemeContext);
+  const theme = !lightTheme ? ' darkmode' : '';
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={"app" + (theme)}>
+      <Nav />
+      <Banner />
+      <RowComponenet title="TRENDING NOW" fetchUrl={requests.fetchTrending} isLargeRow />
+      <RowComponenet title="TOP RATED" fetchUrl={requests.fetchTopRated} />
+      <RowComponenet title="ACTION MOVIES" fetchUrl={requests.fetchActionMovies} />
+      <RowComponenet title="COMEDY MOVIES" fetchUrl={requests.fetchComedyMovies} />
+      <RowComponenet title="HORROR MOVIES" fetchUrl={requests.fetchHorrorMovies} />
+      <RowComponenet title="ROMANCE MOVIES" fetchUrl={requests.fetchRomanceMovies} />
+      <RowComponenet title="NETFLIX ORIGINALS" fetchUrl={requests.fetchNetflixOriginals} />
+      <RowComponenet title="DOCUMENTARIES" fetchUrl={requests.fetchDocumentaries} />
     </div>
+
   );
 }
 
